@@ -1,6 +1,6 @@
 <p align="center">
 
-<a href="gif/nexora.mp4">
+<a href="gif/nexora.gif">
   <img src="gif/nexora-preview.png" width="900">
 </a>
 
