@@ -129,32 +129,3 @@ Nexora is an experimental local AI coding assistant focused on learning and expe
 
 For commercial licensing contact the project maintainer.
 ```
-
----
-
-# Zašto je ova licenca puno bolja
-
-Ona sada zabranjuje:
-
-* **SaaS**
-* **AI platforme**
-* **AI coding assistant komercijalne verzije**
-* **enterprise integraciju**
-
-što je **najčešći način krađe open source AI projekata**.
-
----
-
-# Još jedna pametna stvar koju možeš dodati u repo
-
-U `README.md` na vrhu možeš staviti badge:
-
-```md
-License: Source Available (Non-Commercial)
-```
-
-npr.
-
-```
-![License](https://img.shields.io/badge/license-Non--Commercial-red)
-```
