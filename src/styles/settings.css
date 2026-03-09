@@ -1,0 +1,710 @@
+/* =========================================================
+   SETTINGS MODAL STYLES
+   Imports → Global → Backdrop/Anim → Header
+   → Tabs → Body → Form → Status → Buttons → Help → PDF Card
+   ========================================================= */
+
+/* =========================
+   1) FONT IMPORTS / THEMES
+   ========================= */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+@import "prismjs/themes/prism-tomorrow.css";
+
+/* =========================
+   2) MODAL GLOBAL
+   ========================= */
+.modal {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 18px;
+  border-radius: 18px;
+  padding: 16px 18px 18px;
+
+  background: radial-gradient(circle at top, #020617 0, #020617 45%, #000 100%);
+  color: #e5e7eb;
+
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.8);
+
+  animation: modalIn 0.22s ease-out;
+
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.theme-light .modal {
+  background: radial-gradient(circle at top, #ffffff 0, #fafafa 55%, #e5e7eb 100%);
+  color: #020617;
+}
+
+.code-text,
+.mono {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* =========================
+   3) SETTINGS / LOGOUT / ADMIN ICON BUTTONS
+   ========================= */
+.settings-btn,
+.logout-btn,
+.admin-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: inherit;
+  cursor: pointer;
+
+  transition: background 0.18s ease-out, box-shadow 0.18s ease-out,
+    transform 0.12s ease-out, color 0.18s ease-out;
+}
+
+.settings-btn:hover,
+.logout-btn:hover,
+.admin-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+  transform: translateY(-1px);
+}
+
+.theme-light .settings-btn:hover,
+.theme-light .logout-btn:hover,
+.theme-light .admin-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.settings-btn:active,
+.logout-btn:active,
+.admin-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+/* =========================
+   4) MODAL BACKDROP
+   ========================= */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 50;
+  padding: 0;
+}
+
+/* =========================
+   5) ANIMATIONS + RESPONSIVE
+   ========================= */
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .modal {
+    max-width: 90%;
+    margin: 0 12px;
+  }
+}
+
+@media (max-width: 420px) {
+  .modal {
+    padding: 14px 16px 16px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .modal {
+    max-width: 94%;
+    margin: 0 10px;
+  }
+}
+
+/* =========================
+   6) MODAL HEADER
+   ========================= */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.modal-close-btn {
+  border: none;
+  background: transparent;
+  padding: 4px;
+  border-radius: 999px;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background 0.16s ease-out, transform 0.1s ease-out,
+    box-shadow 0.16s ease-out;
+}
+
+.modal-close-btn:hover {
+  background: rgba(148, 163, 184, 0.22);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.35);
+}
+
+.modal-close-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.25);
+}
+
+/* =========================
+   7) TABS + INDICATOR
+   ========================= */
+.modal-tabs {
+  position: relative;
+  display: inline-flex;
+
+  border-radius: 999px;
+  padding: 3px;
+
+  background: rgba(15, 23, 42, 0.85);
+  margin-bottom: 10px;
+
+  gap: 2px;
+  overflow: hidden;
+}
+
+.theme-light .modal-tabs {
+  background: #e5e7eb;
+}
+
+.modal-tab {
+  position: relative;
+  z-index: 1;
+
+  border: none;
+  border-radius: 999px;
+  padding: 5px 16px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+  background: transparent;
+
+  opacity: 0.75;
+  color: #9ca3af;
+
+  transition: opacity 0.18s ease-out, transform 0.1s ease-out,
+    color 0.18s ease-out;
+}
+
+.theme-light .modal-tab {
+  color: #6b7280;
+}
+
+.modal-tab.active {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.modal-tabs .modal-tab.active {
+  color: #fb923c;
+}
+.theme-light .modal-tabs .modal-tab.active {
+  color: #111827;
+}
+
+.tab-indicator {
+  position: absolute;
+  top: 3px;
+  left: 0;
+
+  height: calc(100% - 6px);
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(4px);
+
+  transform: translateX(0);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.28s cubic-bezier(0.22, 1, 0.36, 1), background 0.18s ease-out,
+    box-shadow 0.18s ease-out;
+
+  z-index: 0;
+}
+
+.theme-light .tab-indicator {
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(148, 163, 184, 0.35);
+}
+
+/* =========================
+   8) MODAL BODY & TAB CONTENT
+   ========================= */
+.modal-body {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+
+  font-size: 13px;
+  position: relative;
+
+  min-height: 220px;
+  transition: min-height 0.2s ease-out;
+}
+
+.modal[data-tab="account"] .modal-body,
+.modal[data-tab="help"] .modal-body {
+  min-height: 280px;
+}
+
+.modal[data-tab="delete"] .modal-body {
+  min-height: 220px;
+}
+
+.tab-content {
+  animation: tabFadeIn 0.22s ease-out;
+}
+
+@keyframes tabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   9) FORM ELEMENTS
+   ========================= */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  opacity: 0.8;
+}
+
+.field-input {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+
+  background: rgba(15, 23, 42, 0.7);
+  padding: 7px 12px;
+
+  font-size: 13px;
+  outline: none;
+
+  color: #f9fafb;
+
+  transition: border-color 0.18s ease-out, box-shadow 0.18s ease-out,
+    background 0.18s ease-out;
+}
+
+.field-input::placeholder {
+  color: rgba(148, 163, 184, 0.9);
+}
+
+.field-input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.4);
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.theme-light .field-input {
+  background: rgba(255, 255, 255, 0.9);
+  color: #020617;
+  border-color: rgba(148, 163, 184, 0.9);
+}
+
+.theme-light .field-input::placeholder {
+  color: rgba(107, 114, 128, 0.95);
+}
+
+.theme-light .field-input:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 1px rgba(14, 165, 233, 0.4);
+}
+
+.field-hint {
+  margin: 0;
+  font-size: 11px;
+  opacity: 0.78;
+}
+
+/* =========================
+   10) STATUS MESSAGES
+   ========================= */
+.form-status {
+  border-radius: 12px;
+  padding: 7px 10px;
+  font-size: 12px;
+}
+
+.form-status-error {
+  background: rgba(220, 38, 38, 0.15);
+  border: 1px solid rgba(248, 113, 113, 0.9);
+  color: #fecaca;
+}
+
+.theme-light .form-status-error {
+  background: rgba(220, 38, 38, 0.08);
+  color: #7f1d1d;
+  border-color: rgba(248, 113, 113, 0.9);
+}
+
+.form-status-success {
+  background: rgba(22, 163, 74, 0.15);
+  border: 1px solid rgba(74, 222, 128, 0.95);
+  color: #bbf7d0;
+}
+
+.theme-light .form-status-success {
+  background: rgba(22, 163, 74, 0.08);
+  color: #14532d;
+  border-color: rgba(74, 222, 128, 0.95);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2px;
+}
+
+/* =========================
+   11) BUTTONS (PRIMARY / SECONDARY / DANGER)
+   ========================= */
+.primary-btn,
+.secondary-btn,
+.danger-btn {
+  border-radius: 999px;
+  padding: 6px 16px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  border: 1px solid transparent;
+  cursor: pointer;
+
+  transition: background 0.18s ease-out, color 0.18s ease-out,
+    transform 0.12s ease-out, box-shadow 0.18s ease-out;
+}
+
+.primary-btn {
+  background: #206eff;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+.primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+.primary-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+}
+
+.secondary-btn {
+  background: transparent;
+  color: inherit;
+  border-color: rgba(148, 163, 184, 0.8);
+}
+
+.secondary-btn:hover {
+  background: rgba(148, 163, 184, 0.18);
+  transform: translateY(-1px);
+}
+
+.secondary-btn:active {
+  transform: translateY(0);
+}
+
+.danger-title {
+  color: #f87171;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.danger-btn {
+  border-color: rgba(248, 113, 113, 0.8);
+  background: rgba(220, 38, 38, 0.9);
+  color: #fff;
+}
+
+.danger-btn:hover {
+  background: rgba(220, 38, 38, 1);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(220, 38, 38, 0.45);
+}
+
+.danger-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(220, 38, 38, 0.35);
+}
+
+.theme-light .danger-btn {
+  background: rgba(220, 38, 38, 0.9);
+  color: #fff;
+}
+
+/* =========================
+   12) HELP TAB SECTIONS
+   ========================= */
+.modal-help {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-help-section {
+  border-radius: 12px;
+  padding: 9px 11px;
+
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  background: rgba(15, 23, 42, 0.7);
+}
+
+.theme-light .modal-help-section {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.modal-help-section h3 {
+  margin: 0 0 4px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.modal-help-section p {
+  margin: 0 0 6px;
+  opacity: 0.92;
+}
+
+.modal-help-section ul {
+  margin: 0 0 4px 16px;
+  padding: 0;
+  font-size: 13px;
+}
+
+.modal-help-section li {
+  margin-bottom: 2px;
+}
+
+/* =========================
+   13) PDF DOCUMENT CARD (OPEN / DOWNLOAD)
+   ========================= */
+.pdf-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 14px;
+  border-radius: 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.03)
+  );
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.pdf-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  flex: 0 0 auto;
+}
+
+.pdf-meta {
+  min-width: 0;
+  flex: 1;
+}
+
+.pdf-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.pdf-subtitle {
+  margin-top: 4px;
+  font-size: 0.86rem;
+  opacity: 0.75;
+  line-height: 1.25;
+}
+
+.pdf-actions {
+  display: flex;
+  gap: 10px;
+  flex: 0 0 auto;
+}
+
+.pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 38px;
+  padding: 0 14px;
+
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+
+  transition: transform 160ms ease, background 160ms ease,
+    border-color 160ms ease;
+}
+
+.pdf-btn:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.pdf-btn:active {
+  transform: translateY(0);
+}
+
+.pdf-btn--primary {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.26);
+}
+
+.pdf-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.35);
+}
+
+@media (max-width: 520px) {
+  .pdf-card{
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    grid-template-areas:
+      "icon meta"
+      "actions actions";
+    gap: 12px;
+    align-items: center;
+  }
+
+  .pdf-icon{
+    grid-area: icon;
+  }
+
+  .pdf-meta{
+    grid-area: meta;
+    min-width: 0;
+  }
+
+  .pdf-title,
+  .pdf-subtitle{
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .pdf-actions{
+    grid-area: actions;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .pdf-btn{
+    width: 100%;
+  }
+}
+
+.theme-light .pdf-card {
+  border-color: rgba(148, 163, 184, 0.55);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+}
+
+.theme-light .pdf-icon {
+  background: rgba(2, 6, 23, 0.04);
+  border-color: rgba(148, 163, 184, 0.55);
+}
+
+.theme-light .pdf-btn {
+  background: rgba(2, 6, 23, 0.04);
+  border-color: rgba(148, 163, 184, 0.55);
+}
+
+.theme-light .pdf-btn:hover {
+  background: rgba(2, 6, 23, 0.07);
+  border-color: rgba(148, 163, 184, 0.75);
+}
+
+.theme-light .pdf-btn--primary {
+  background: rgba(32, 110, 255, 0.12);
+  border-color: rgba(32, 110, 255, 0.35);
+}

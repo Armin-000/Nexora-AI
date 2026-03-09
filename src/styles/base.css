@@ -1,0 +1,149 @@
+pre[class*="language-"],
+code[class*="language-"] {
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* =========================
+   Root & Reset
+   ========================= */
+
+:root {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+pre[class*="language-"],
+:not(pre) > code[class*="language-"] {
+  background: #000000;
+}
+
+.mono {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+.theme-dark .chat-input {
+  color: #f9fafb;
+  caret-color: #facc15;
+}
+
+.theme-light .chat-input {
+  color: #020617;
+  caret-color: #0ea5e9;
+}
+
+input,
+textarea,
+.chat-input {
+  cursor: text;
+}
+
+@keyframes gradientPulse {
+  0% {
+    background-size: 100% 100%;
+  }
+  50% {
+    background-size: 120% 120%;
+  }
+  100% {
+    background-size: 100% 100%;
+  }
+}
+
+@keyframes topbarBorderMove {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    transform: translateY(4px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes typingBlink {
+  0%,
+  80%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+/* ========================================
+   Nexora Sidebar Ambient Glow
+   ======================================== */
+
+@keyframes nxSidebarBreath {
+  0% {
+    transform: scaleX(1) scaleY(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scaleX(1.15) scaleY(1.4);
+    opacity: 0.85;
+  }
+
+  100% {
+    transform: scaleX(1) scaleY(1);
+    opacity: 0.6;
+  }
+}
+
+@keyframes nxSidebarBreath {
+  0% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.18);
+  }
+
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+}

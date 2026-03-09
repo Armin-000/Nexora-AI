@@ -1,0 +1,631 @@
+/* =========================================================
+   Nexora Document Sidebar
+   - single expandable right sidebar
+   - closed: icons only
+   - open: icons + labels
+   - desktop + mobile drawer
+   - theme-aware
+   ========================================================= */
+
+:root {
+  --nx-doc-z: 60;
+
+  --nx-doc-sidebar-w-closed: 64px;
+  --nx-doc-sidebar-w-open: 260px;
+
+  --nx-doc-radius: 18px;
+  --nx-doc-btn-radius: 14px;
+
+  --nx-doc-space-1: 8px;
+  --nx-doc-space-2: 10px;
+  --nx-doc-space-3: 12px;
+  --nx-doc-space-4: 14px;
+
+  --nx-doc-icon-slot: 20px;
+  --nx-doc-avatar-size: 38px;
+
+  --nx-doc-blur: 18px;
+  --nx-doc-accent: rgba(56, 189, 248, 0.9);
+
+  --nx-doc-border: rgba(148, 163, 184, 0.28);
+  --nx-doc-border-strong: rgba(148, 163, 184, 0.32);
+
+  --nx-doc-transition-fast: 140ms ease;
+  --nx-doc-transition-base: 180ms ease;
+  --nx-doc-transition-layout: 240ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  --nx-doc-mobile-break: 1450px;
+}
+
+/* =========================================================
+   Overlay
+   ========================================================= */
+
+.nx-doc-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--nx-doc-z) - 1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--nx-doc-transition-layout);
+}
+
+.nx-doc-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.theme-dark .nx-doc-overlay {
+  background: rgba(2, 6, 23, 0.55);
+}
+
+.theme-light .nx-doc-overlay {
+  background: rgba(2, 6, 23, 0.35);
+}
+
+/* =========================================================
+   Sidebar shell
+   ========================================================= */
+
+.nx-doc-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: calc(var(--nx-doc-z) + 2);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: var(--nx-doc-sidebar-w-closed);
+  height: 100vh;
+  padding: var(--nx-doc-space-2) var(--nx-doc-space-1);
+
+  overflow: hidden;
+  backdrop-filter: blur(var(--nx-doc-blur));
+
+  border-left: 1px solid var(--nx-doc-border);
+  border-top-left-radius: var(--nx-doc-radius);
+  border-bottom-left-radius: var(--nx-doc-radius);
+
+  transition:
+    width var(--nx-doc-transition-layout),
+    transform var(--nx-doc-transition-layout),
+    border-color var(--nx-doc-transition-base);
+  will-change: width, transform;
+}
+
+.nx-doc-sidebar.is-open {
+  width: var(--nx-doc-sidebar-w-open);
+}
+
+.nx-doc-sidebar.is-desktop {
+  transform: translateX(0);
+}
+
+.nx-doc-sidebar.is-drawer.is-open {
+  transform: translateX(0);
+}
+
+.nx-doc-sidebar.is-drawer.is-closed {
+  transform: translateX(calc(var(--nx-doc-sidebar-w-closed) + 10px));
+}
+
+.theme-dark .nx-doc-sidebar {
+  background: rgba(15, 23, 42, 0.78);
+  color: #f8fafc;
+}
+
+.theme-light .nx-doc-sidebar {
+  background: rgba(255, 255, 255, 0.88);
+  color: #020617;
+}
+
+/* =========================================================
+   Sidebar sections
+   ========================================================= */
+
+.nx-doc-sidebar__top,
+.nx-doc-sidebar__middle,
+.nx-doc-sidebar__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nx-doc-space-2);
+}
+
+.nx-doc-sidebar__top {
+  padding-top: 2px;
+}
+
+.nx-doc-sidebar__middle {
+  flex: 1;
+  min-height: 0;
+  margin-top: var(--nx-doc-space-2);
+  display: flex;
+  flex-direction: column;
+}
+
+.nx-doc-sidebar__bottom {
+  margin-top: auto;
+  padding-bottom: 6px;
+}
+
+/* =========================================================
+   Shared row styles
+   ========================================================= */
+
+.nx-doc-sidebar__toggle,
+.nx-doc-sidebar__item,
+.nx-doc-sidebar__avatar {
+  display: flex;
+  align-items: center;
+  gap: var(--nx-doc-space-4);
+
+  width: 100%;
+  min-height: 44px;
+  padding: 0 var(--nx-doc-space-3);
+  border-radius: var(--nx-doc-btn-radius);
+  border: 1px solid transparent;
+
+  background: transparent;
+  color: inherit;
+  text-decoration: none;
+
+  transition:
+    background var(--nx-doc-transition-fast),
+    border-color var(--nx-doc-transition-fast),
+    opacity var(--nx-doc-transition-fast),
+    transform var(--nx-doc-transition-fast);
+}
+
+.nx-doc-sidebar__toggle,
+.nx-doc-sidebar__item {
+  cursor: pointer;
+  user-select: none;
+}
+
+.nx-doc-sidebar__avatar {
+  min-height: 48px;
+  cursor: default;
+}
+
+.nx-doc-sidebar__toggle:hover,
+.nx-doc-sidebar__item:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.nx-doc-sidebar__toggle:active,
+.nx-doc-sidebar__item:active {
+  transform: translateY(0);
+}
+
+.nx-doc-sidebar__toggle:focus-visible,
+.nx-doc-sidebar__item:focus-visible {
+  outline: 2px solid var(--nx-doc-accent);
+  outline-offset: 2px;
+}
+
+.theme-dark .nx-doc-sidebar__toggle:hover,
+.theme-dark .nx-doc-sidebar__item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(148, 163, 184, 0.12);
+}
+
+.theme-light .nx-doc-sidebar__toggle:hover,
+.theme-light .nx-doc-sidebar__item:hover {
+  background: rgba(2, 6, 23, 0.04);
+  border-color: rgba(148, 163, 184, 0.16);
+}
+
+/* =========================================================
+   Icon slots
+   ========================================================= */
+
+.nx-doc-sidebar__icon,
+.nx-doc-sidebar__avatarSlot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--nx-doc-icon-slot);
+  min-width: var(--nx-doc-icon-slot);
+  height: var(--nx-doc-icon-slot);
+}
+
+.nx-doc-sidebar__icon svg {
+  display: block;
+}
+
+.nx-doc-sidebar__avatarCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: var(--nx-doc-avatar-size);
+  height: var(--nx-doc-avatar-size);
+  min-width: var(--nx-doc-avatar-size);
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.theme-dark .nx-doc-sidebar__avatarCircle {
+  color: #f8fafc;
+}
+
+.theme-light .nx-doc-sidebar__avatarCircle {
+  color: #0f172a;
+}
+
+/* =========================================================
+   Labels
+   ========================================================= */
+
+.nx-doc-sidebar__label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  pointer-events: none;
+
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+
+  opacity: 0;
+  max-width: 0;
+
+  transition:
+    opacity var(--nx-doc-transition-fast),
+    max-width var(--nx-doc-transition-layout);
+}
+
+.nx-doc-sidebar.is-open .nx-doc-sidebar__label {
+  opacity: 1;
+  max-width: 180px;
+  pointer-events: auto;
+}
+
+/* =========================================================
+   History block
+   ========================================================= */
+
+.nx-doc-sidebar.is-closed .nx-doc-sidebar__history {
+  display: none;
+}
+
+.nx-doc-sidebar__history {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-height: 0;
+}
+
+.nx-doc-sidebar__historyTitle {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.72;
+  padding: 0 4px;
+  flex-shrink: 0;
+}
+
+.nx-doc-sidebar__historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-gutter: stable;
+}
+
+.nx-doc-sidebar__historyList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.nx-doc-sidebar__historyList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.nx-doc-sidebar__historyList::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.35);
+}
+
+.nx-doc-sidebar__historyList::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.55);
+}
+
+.nx-doc-sidebar__historyItem {
+  width: 100%;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: 0.2s ease;
+  flex-shrink: 0;
+}
+
+.theme-dark .nx-doc-sidebar__historyItem {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.theme-light .nx-doc-sidebar__historyItem {
+  background: rgba(2, 6, 23, 0.03);
+}
+
+.nx-doc-sidebar__historyItem:hover {
+  transform: translateY(-1px);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.nx-doc-sidebar__historyItem.is-active {
+  border-color: var(--nx-doc-history-active-border);
+  box-shadow: 0 0 0 1px var(--nx-doc-history-active-ring) inset;
+}
+
+.theme-dark {
+  --nx-doc-history-active-border: #ffffff;
+  --nx-doc-history-active-ring: rgba(56, 189, 248, 0.34);
+}
+
+.theme-light {
+  --nx-doc-history-active-border: #0ea5e9;
+  --nx-doc-history-active-ring: rgba(14, 165, 233, 0.22);
+}
+
+.nx-doc-sidebar__historyMain {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 10px 12px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nx-doc-sidebar__historyMain:focus-visible {
+  outline: 2px solid var(--nx-doc-accent);
+  outline-offset: -2px;
+}
+
+.nx-doc-sidebar__historyRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.nx-doc-sidebar__historyText {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nx-doc-sidebar__historyMeta {
+  font-size: 0.74rem;
+  opacity: 0.62;
+}
+
+.nx-doc-sidebar__historyDelete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  flex-shrink: 0;
+  align-self: center;
+  opacity: 0.82;
+  transition:
+    color 0.18s ease,
+    background 0.18s ease,
+    transform 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.nx-doc-sidebar__historyDelete svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.nx-doc-sidebar__historyDelete:hover {
+  opacity: 1;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.12);
+  transform: scale(1.05);
+}
+
+.nx-doc-sidebar__historyDelete:active {
+  transform: scale(0.96);
+}
+
+.nx-doc-sidebar__historyDelete:focus-visible {
+  outline: 2px solid rgba(239, 68, 68, 0.7);
+  outline-offset: 2px;
+}
+
+.nx-doc-sidebar__historyEmpty {
+  font-size: 0.88rem;
+  opacity: 0.65;
+  padding: 8px 4px;
+}
+
+/* =========================================================
+   Mobile wave opener
+   ========================================================= */
+
+.nx-doc-wave {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  z-index: calc(var(--nx-doc-z) + 3);
+
+  width: 12px;
+  height: 62px;
+
+  transform: translateY(-50%);
+  opacity: 0.88;
+
+  border: 1px solid var(--nx-doc-border-strong);
+  border-right: none;
+  border-top-left-radius: 999px;
+  border-bottom-left-radius: 999px;
+
+  background: transparent;
+  backdrop-filter: blur(var(--nx-doc-blur));
+  cursor: pointer;
+  user-select: none;
+
+  transition:
+    transform var(--nx-doc-transition-layout),
+    opacity var(--nx-doc-transition-fast);
+}
+
+.nx-doc-wave::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 60%;
+  width: 2px;
+  height: 22px;
+  border-radius: 999px;
+  transform: translate(50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  opacity: 0.75;
+}
+
+.theme-dark .nx-doc-wave {
+  background: #facc15;
+}
+
+.theme-light .nx-doc-wave {
+  background: #0ea5e9;
+}
+
+@media (max-width: 1450px) {
+  .nx-doc-wave {
+    display: block;
+  }
+
+  .nx-doc-wave.is-closed {
+    transform: translateY(-50%) translateX(0);
+    opacity: 0.88;
+  }
+
+  .nx-doc-wave.is-open {
+    transform: translateY(-50%) translateX(calc(-1 * var(--nx-doc-sidebar-w-open)));
+    opacity: 0.62;
+  }
+}
+
+@media (min-width: 1450px) {
+  .nx-doc-wave {
+    display: none;
+  }
+}
+
+/* =========================================================
+   Desktop polish
+   ========================================================= */
+
+@media (min-width: 1450px) {
+  .nx-doc-sidebar {
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+  }
+
+  .theme-dark .nx-doc-sidebar {
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.22);
+  }
+}
+
+/* =========================================================
+   Reduced motion
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .nx-doc-overlay,
+  .nx-doc-sidebar,
+  .nx-doc-sidebar__toggle,
+  .nx-doc-sidebar__item,
+  .nx-doc-sidebar__avatar,
+  .nx-doc-sidebar__label,
+  .nx-doc-sidebar__history,
+  .nx-doc-wave {
+    transition: none;
+  }
+}
+
+/* ========================================
+   Document Sidebar Corner Glow
+   ======================================== */
+
+.nx-doc-sidebar::after {
+  content: "";
+  position: absolute;
+  bottom: -28px;
+  right: -28px;
+
+  width: 120px;
+  height: 120px;
+
+  pointer-events: none;
+  z-index: 0;
+
+  filter: blur(42px);
+
+  animation: nxSidebarBreath 8s ease-in-out infinite;
+}
+
+/* closed icon bar */
+
+.nx-doc-sidebar.is-closed::after {
+  width: 90px;
+  height: 90px;
+  bottom: -20px;
+  right: -20px;
+}
+
+.theme-dark .nx-doc-sidebar::after {
+  background: radial-gradient(
+    circle,
+    rgba(7, 174, 240, 0.9) 0%,
+    rgba(99, 223, 245, 0.9) 40%,
+    transparent 75%
+  );
+}
+
+.theme-light .nx-doc-sidebar::after {
+  background: radial-gradient(
+    circle,
+    rgba(71, 197, 255, 0.9) 0%,
+    rgba(12, 97, 255, 0.9) 40%,
+    transparent 75%
+  );
+}

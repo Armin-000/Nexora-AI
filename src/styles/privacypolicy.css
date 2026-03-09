@@ -1,0 +1,16 @@
+@import "./impressum.css";
+
+.legal-page--privacy .legal-badge {
+  color: #206eff;
+}
+
+.legal-page--privacy .legal-brand__dot {
+  background: #10b981;
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.55);
+}
+
+.legal-page--privacy .legal-note--privacy {
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  background: #206eff;
+  color: #ffffff;
+}
