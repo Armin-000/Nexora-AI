@@ -444,4 +444,3 @@ ARCHITECTURE.md → detailed system architecture
 Armin
 
 Nexora is an experimental local AI coding assistant focused on learning and experimentation with local AI systems.
-```

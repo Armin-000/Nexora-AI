@@ -1,4 +1,3 @@
-```md
 # Nexora — AI Context
 
 This file defines the complete operational context for AI assistants working on the Nexora project.

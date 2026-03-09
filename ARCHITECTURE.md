@@ -1,4 +1,3 @@
-```md
 # Nexora — System Architecture
 
 This document describes the technical architecture of Nexora.
