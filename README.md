@@ -1,4 +1,3 @@
-```md
 # Nexora — Local AI Coding Assistant
 
 Nexora is a lightweight **local AI coding assistant** built with **React**, **TypeScript**, and **Vite**.
