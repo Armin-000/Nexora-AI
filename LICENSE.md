@@ -128,4 +128,3 @@ Nexora is an experimental local AI coding assistant focused on learning and expe
 ---
 
 For commercial licensing contact the project maintainer.
-```
