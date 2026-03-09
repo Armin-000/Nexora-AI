@@ -1,8 +1,12 @@
+<h1 align="center">Nexora</h1>
+
+<p align="center">
+Local AI Coding Assistant powered by Ollama
+</p>
+
 <p align="center">
 
-<a href="gif/nexora.gif">
-  <img src="gif/nexora-preview.png" width="900">
-</a>
+<img src="gif/nexora.gif" width="900">
 
 </p>
 
