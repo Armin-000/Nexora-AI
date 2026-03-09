@@ -1,16 +1,8 @@
-<h1 align="center">Nexora</h1>
-
-<p align="center">
-Local AI Coding Assistant powered by Ollama
-</p>
-
 <p align="center">
 
-<img src="https://img.shields.io/badge/React-18-blue" />
-<img src="https://img.shields.io/badge/TypeScript-5-blue" />
-<img src="https://img.shields.io/badge/Vite-5-purple" />
-<img src="https://img.shields.io/badge/Ollama-local-green" />
-<img src="https://img.shields.io/badge/license-Non--Commercial-red" />
+<a href="gif/nexora.mp4">
+  <img src="gif/nexora-preview.png" width="900">
+</a>
 
 </p>
 
